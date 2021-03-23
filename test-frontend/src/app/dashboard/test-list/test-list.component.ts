@@ -12,15 +12,18 @@ export class TestListComponent implements OnInit {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    // get all test data
   }
 
   createTest() {
+    // open dialog to create test
     const dialogRef = this.dialog.open(CreateTestComponent, {
       width: '800px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      // refresh test data
     });
   }
 

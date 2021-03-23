@@ -1,15 +1,15 @@
-<form [formGroup]="testForm">
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Test Name</mat-label>
-    <input matInput formControlName="name" name="name">
-  </mat-form-field>
-
+<form>
   <div *ngFor="let question of testQuestions; let index = index" class="question-box">
-    <label><h3>{{index + 1}}. {{question.question}}</h3></label>
-    <br/>
-    <mat-radio-group class="question-radio-group">
+    <label>
+      <h3>{{index + 1}}. {{question.question}}</h3>
+    </label>
+    <br />
+    <mat-radio-group class="question-radio-group" [(ngModel)]="selectedAnswers[question._id]" name="question{{index}}">
       <mat-radio-button *ngFor="let opt of question.options" [value]="opt._id">{{opt.option}}</mat-radio-button>
-      <!-- <mat-radio-button value="2">Option 2</mat-radio-button> -->
     </mat-radio-group>
+  </div>
+
+  <div class="pull-right">
+    <button mat-raised-button color="primary" (click)="saveTest()">Create</button>
   </div>
 </form>

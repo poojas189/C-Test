@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Question } from 'src/app/models/question';
+import { Test } from 'src/app/models/test';
 import { TestService } from 'src/app/services/test.service';
 
 @Component({
@@ -10,29 +11,38 @@ import { TestService } from 'src/app/services/test.service';
 })
 export class CreateTestComponent implements OnInit {
 
-  testForm: FormGroup;
   testQuestions: Question[];
+  selectedAnswers: any = {};
+  startTime: number;
 
   constructor(private testService: TestService,
-    private fb: FormBuilder) {
-
-    this.testForm = fb.group({
-      name: ['', Validators.required],
-      questions: this.fb.array([])
-    })
-
+    private ref: MatDialogRef<CreateTestComponent>) {
   }
 
   ngOnInit(): void {
+    this.startTime = Date.now();
+    // fetch questions for test
     this.testService.getRandomQuestionsForTest().subscribe(response => {
-      console.log('**** response', response);
       this.testQuestions = response;
-      let questionArray = new FormArray([]);
       this.testQuestions.forEach(element => {
-        questionArray.push(new FormControl('', Validators.required));
+        this.selectedAnswers[element._id] = "";
       });
-      console.log('**** response', this.testForm);
     })
+  }
+
+  saveTest() {
+    // perform save test here
+    let test = new Test();
+    test.questions = this.testQuestions;
+    test.selectedAnswers = this.selectedAnswers;
+    test.duration = Math.round((Date.now() - this.startTime) / (1000));
+
+    this.testService.createTest(test).subscribe(res => {
+      this.ref.close();
+    }, error => {
+
+    });
+
   }
 
 }

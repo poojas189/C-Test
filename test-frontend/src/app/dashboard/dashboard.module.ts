@@ -10,7 +10,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { TestListComponent } from './test-list/test-list.component';
 import { CreateTestComponent } from './create-test/create-test.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,7 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
-    ReactiveFormsModule
+    FormsModule
   ]
 })
 export class DashboardModule { }
