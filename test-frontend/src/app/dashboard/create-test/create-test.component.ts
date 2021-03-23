@@ -27,6 +27,8 @@ export class CreateTestComponent implements OnInit {
       this.testQuestions.forEach(element => {
         this.selectedAnswers[element._id] = "";
       });
+    }, error => {
+      console.log(error);
     })
   }
 
@@ -40,9 +42,8 @@ export class CreateTestComponent implements OnInit {
     this.testService.createTest(test).subscribe(res => {
       this.ref.close();
     }, error => {
-
+      console.log(error);
     });
-
   }
 
 }

@@ -1,0 +1,14 @@
+.top-content {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.avg-content {
+  display: flex;
+  align-items: center;
+  h4 {
+    letter-spacing: 1px;
+  }
+}

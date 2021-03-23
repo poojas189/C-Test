@@ -7,11 +7,11 @@ import { TestDto } from './dto/test.dto';
 @Injectable()
 export class TestsService {
 
-  constructor(
-    @InjectModel(Test.name) private testModal: Model<TestDocument>) { }
+  constructor(@InjectModel(Test.name) private testModal: Model<TestDocument>) { }
 
   async create(testDto: TestDto): Promise<Test> {
 
+    // calculate result
     let result = 0;
     Object.keys(testDto.selectedAnswers).forEach(key => {
       let foundQue = testDto.questions.find(q => q._id.toString() == key);
@@ -22,8 +22,9 @@ export class TestsService {
       }
     });
 
+    let count = await this.testModal.count();
     const createdTest = new this.testModal({
-      name: "Test" + this.testModal.length,
+      name: "Test " + (count + 1),
       questions: testDto.questions,
       selectedAnswers: testDto.selectedAnswers,
       date: new Date(),
@@ -31,6 +32,7 @@ export class TestsService {
       duration: testDto.duration
     });
 
+    // save test to db
     return createdTest.save();
   }
 

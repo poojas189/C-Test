@@ -16,6 +16,10 @@ export class TestService {
   }
 
   createTest(test: Test) {
-    return this.http.post('http://localhost:3000/test', test);
+    return this.http.post('http://localhost:3000/tests', test);
+  }
+
+  getAllTests(): Observable<Test[]> {
+    return this.http.get<Test[]>('http://localhost:3000/tests');
   }
 }

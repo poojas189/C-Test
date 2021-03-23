@@ -10,8 +10,8 @@ export class QuestionsController {
 
   // create question
   @Post()
-  async create(@Body() questionDto: QuestionDto) {
-    this.questionService.create(questionDto);
+  async create(@Body() questionDto: QuestionDto): Promise<Question> {
+    return this.questionService.create(questionDto);
   }
 
   // get random 4 questions for test

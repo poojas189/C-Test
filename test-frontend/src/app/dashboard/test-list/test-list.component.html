@@ -1,3 +1,46 @@
-<div class="pull-right">
+<div class="top-content">
   <button mat-raised-button color="primary" (click)="createTest()">Create Test</button>
+  <div>
+    <span class="avg-content">
+      <h4>Average Duration:&nbsp; </h4> {{averageDuration | number: '1.1-2'}} Seconds
+    </span>
+    <span class="avg-content">
+      <h4>Average Result:&nbsp;</h4> {{averageResult | number: '1.1-2' }}
+    </span>
+  </div>
+</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort class="full-width">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.date | date: 'MM/dd/YYYY hh:mm'}} </td>
+    </ng-container>
+
+    <!-- Result Column -->
+    <ng-container matColumnDef="result">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Result </th>
+      <td mat-cell *matCellDef="let element"> {{element.result}} / {{element.questions.length}} </td>
+    </ng-container>
+
+    <!-- Duration Column -->
+    <ng-container matColumnDef="duration">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Duration &nbsp;<small>(Seconds)</small> </th>
+      <td mat-cell *matCellDef="let element"> {{element.duration}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>

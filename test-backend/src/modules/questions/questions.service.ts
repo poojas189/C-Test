@@ -11,6 +11,7 @@ export class QuestionsService {
   // create question
   async create(questionDto: QuestionDto): Promise<Question> {
     const createdQue = new this.questionModel(questionDto);
+    // save to db
     return createdQue.save();
   }
 

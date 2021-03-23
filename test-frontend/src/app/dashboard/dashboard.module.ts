@@ -6,11 +6,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { TestListComponent } from './test-list/test-list.component';
 import { CreateTestComponent } from './create-test/create-test.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,6 +26,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
     FormsModule
   ]
 })
